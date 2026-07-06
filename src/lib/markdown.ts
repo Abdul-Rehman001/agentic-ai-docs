@@ -1,12 +1,16 @@
 import fs from 'fs';
 import path from 'path';
 
-// Using parent directory to access the MD files created by the user
-const docsDirectory = path.join(process.cwd(), '..');
+// Using current directory since the MD files are now in the project root
+const docsDirectory = process.cwd();
 
 export function getDocSlugs() {
   const files = fs.readdirSync(docsDirectory);
-  return files.filter(file => file.endsWith('.md'));
+  return files.filter(file => 
+    file.endsWith('.md') && 
+    file !== 'AGENTS.md' && 
+    file !== 'CLAUDE.md'
+  );
 }
 
 export function getDocBySlug(slug: string) {

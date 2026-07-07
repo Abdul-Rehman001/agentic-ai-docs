@@ -211,3 +211,18 @@ Since it's a relatively new, evolving standard, tooling maturity, security model
 ## What's Next
 
 **Module 5: Retrieval Fundamentals** — embeddings, similarity math, chunking strategies, vector databases, and dense/sparse/hybrid search. This is the foundational machinery behind RAG (Modules 6-7) and behind the long-term memory retrieval you saw in Module 3 — both are applications of the same underlying retrieval concepts covered next.
+
+---
+
+## 🛑 Common Pitfalls & Debugging
+
+1. **Authentication Leaks**: Never pass sensitive API keys from the LLM client to the MCP server. The MCP server should manage its own secrets and environments.
+2. **Assuming Client Capabilities**: The MCP Server provides the tools, but it cannot force the client to use them correctly. The client LLM must still be smart enough to understand the tool schemas.
+
+```quiz
+Q: What problem does the Model Context Protocol (MCP) primarily solve?
+- [x] The N x M integration problem where every new AI app requires custom code for every new data source.
+- [ ] The high cost of embedding models by replacing them with local alternatives.
+- [ ] The context window limitation by infinitely compressing tokens.
+Explanation: MCP standardizes how AI applications communicate with data sources and tools, meaning you write the integration once, and any MCP-compatible client can use it.
+```

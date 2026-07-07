@@ -4,6 +4,7 @@ import './globals.css';
 import AppLayout from '@/components/AppLayout';
 import { getAllDocs } from '@/lib/markdown';
 import { ProgressProvider } from '@/components/ProgressContext';
+import { ThemeProvider } from '@/components/ThemeContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -21,12 +22,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} font-sans antialiased text-foreground`}>
-        <ProgressProvider>
-          <AppLayout docs={docs}>
-            {children}
-          </AppLayout>
-        </ProgressProvider>
+      <body className={`${inter.variable} font-sans antialiased text-gray-900 bg-white dark:text-gray-100 dark:bg-[#09090b] transition-colors duration-300`}>
+        <ThemeProvider>
+          <ProgressProvider>
+            <AppLayout docs={docs}>
+              {children}
+            </AppLayout>
+          </ProgressProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

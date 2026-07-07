@@ -296,3 +296,18 @@ A supervisor routes tasks to the right specialist agent(s) and aggregates/synthe
 ## What's Next
 
 **Module 3: Memory** — short-term, long-term, episodic, semantic, and working memory; how conversation history gets summarized and stored so an agent doesn't just forget everything the moment the context window fills up. This is the mechanism that lets the agent loop from this module persist state *across* sessions, not just within one.
+
+---
+
+## 🛑 Common Pitfalls & Debugging
+
+1. **Context Window Explosion**: As the ReAct loop goes on (Thought -> Act -> Obs -> Thought...), the conversation history grows rapidly. Long loops will eventually hit the max context limit or cause the LLM to "forget" the original goal.
+2. **Analysis Paralysis**: The agent gets stuck in a "Thought" loop where it keeps reasoning but never actually calls a tool to take action.
+
+```quiz
+Q: In the ReAct (Reason + Act) loop, what is the primary purpose of the "Observation" step?
+- [ ] It is where the LLM thinks about what to do next.
+- [x] It is the actual result returned by the environment/tool after an action is taken.
+- [ ] It is the final summary presented to the user.
+Explanation: An Observation is the raw output from the tool execution (e.g., the text of a webpage, or the JSON response from an API), which the LLM then uses to inform its next Thought.
+```

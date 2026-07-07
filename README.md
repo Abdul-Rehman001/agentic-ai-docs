@@ -10,9 +10,9 @@ A modular, self-built handbook for learning Agentic AI end-to-end — theory, ar
 | 2 | [Agentic Core](./02-agentic-core.md) (agent loop, ReAct, planner/executor/supervisor/critic, reflection, single vs multi-agent) | ✅ Done |
 | 3 | [Memory](./03-memory.md) (short-term, long-term, episodic, semantic, working) | ✅ Done |
 | 4 | [MCP](./04-mcp.md) — Model Context Protocol | ✅ Done |
-| 5 | Retrieval Fundamentals (embeddings, similarity math, chunking, vector DBs, dense/sparse/hybrid search, ANN/HNSW) | ⏳ Next |
-| 6 | RAG & Advanced RAG (query rewriting, CRAG, Self-RAG, Adaptive RAG, parent-child/multi-vector retrieval, Graph RAG) | ⬜ Not started |
-| 7 | Agentic RAG (where retrieval and agents intersect) | ⬜ Not started |
+| 5 | [Retrieval Fundamentals](./05-retrieval-fundamentals.md) (embeddings, similarity math, chunking, vector DBs, dense/sparse/hybrid search, ANN/HNSW) | ✅ Done |
+| 6 | [RAG & Advanced RAG](./06-rag-and-advanced-rag.md) (query rewriting, CRAG, Self-RAG, Adaptive RAG, parent-child/multi-vector retrieval, Graph RAG) | ✅ Done |
+| 7 | Agentic RAG (where retrieval and agents intersect) | ⏳ Next |
 | 8 | AI Architecture (full production system design) | ⬜ Not started |
 | 9 | Evaluation (hallucination detection, Precision@K/Recall@K, groundedness, faithfulness, LLM-as-judge) | ⬜ Not started |
 | 10 | Production Topics (caching, cost, rate limiting, streaming, guardrails, observability, tracing, retries, fallback models) | ⬜ Not started |
@@ -38,9 +38,9 @@ agentic-ai-handbook/
 ├── 02-agentic-core.md                            ✅
 ├── 03-memory.md                                  ✅
 ├── 04-mcp.md                                     ✅
-├── 05-retrieval-fundamentals.md                  (coming next)
-├── 06-rag-and-advanced-rag.md
-├── 07-agentic-rag.md
+├── 05-retrieval-fundamentals.md                  ✅
+├── 06-rag-and-advanced-rag.md                    ✅
+├── 07-agentic-rag.md                             (coming next)
 ├── 08-ai-architecture.md
 ├── 09-evaluation.md
 └── 10-production.md

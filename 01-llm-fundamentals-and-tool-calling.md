@@ -264,3 +264,18 @@ Agentic pipelines chain multiple LLM calls together (planner → router → exec
 ## What's Next
 
 **Module 2: Agentic Core** — the agent loop (Reason → Act → Observe → Repeat), ReAct pattern, single vs multi-agent architectures, planner/executor/supervisor/critic roles, and reflection. This is where tool calling (from this module) becomes the mechanism an autonomous agent uses to actually get things done.
+
+---
+
+## 🛑 Common Pitfalls & Debugging
+
+1. **Infinite Tool Loops**: The model might repeatedly call a tool with the same arguments if the tool returns a generic error instead of a clear explanation of what went wrong.
+2. **Hallucinated Arguments**: The LLM might invent parameters that don't exist in your JSON schema. Always enforce strict validation before executing the tool.
+
+```quiz
+Q: What triggers the application to execute a tool function?
+- [ ] The LLM directly runs the code on its own servers.
+- [ ] The application automatically runs every function listed in the tools array.
+- [x] The LLM returns a stop_reason of "tool_use", prompting the application to run the code and return the result.
+Explanation: The LLM itself cannot run code. It simply outputs a structured request (JSON) asking the application to run it on its behalf.
+```

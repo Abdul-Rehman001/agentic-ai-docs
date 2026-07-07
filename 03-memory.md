@@ -209,3 +209,18 @@ Same risk as any retrieval problem (Module 5) — irrelevant retrieved content a
 ## What's Next
 
 **Module 4: MCP (Model Context Protocol)** — the emerging standard for how agents connect to external tools, data sources, and prompts in a consistent way, instead of every application building bespoke tool-calling integrations for every service.
+
+---
+
+## 🛑 Common Pitfalls & Debugging
+
+1. **Storing Too Much Junk**: If you passively log every single user message to long-term memory, the Vector DB becomes polluted with irrelevant chit-chat ("Hello", "Thanks"), ruining retrieval accuracy.
+2. **Loss of Nuance in Summarization**: When compressing old conversations into short-term summary memory, critical edge-case details are often generalized away.
+
+```quiz
+Q: What is the primary difference between Short-term and Long-term memory in Agentic systems?
+- [ ] Short-term memory is stored in a Vector DB, Long-term is stored in RAM.
+- [x] Short-term memory is the immediate context window of the current session, Long-term memory persists across sessions via external storage.
+- [ ] Short-term memory uses SQL, Long-term uses JSON.
+Explanation: Short-term memory is bounded by the LLM's context window for the active conversation. Long-term memory requires explicitly saving facts/vectors to an external database to be retrieved later.
+```

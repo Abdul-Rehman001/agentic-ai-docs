@@ -8,9 +8,9 @@ A modular, self-built handbook for learning Agentic AI end-to-end — theory, ar
 |---|---|---|
 | 1 | [LLM Fundamentals & Tool Calling](./01-llm-fundamentals-and-tool-calling.md) | ✅ Done |
 | 2 | [Agentic Core](./02-agentic-core.md) (agent loop, ReAct, planner/executor/supervisor/critic, reflection, single vs multi-agent) | ✅ Done |
-| 3 | Memory (short-term, long-term, episodic, semantic, working) | ⏳ Next |
-| 4 | MCP — Model Context Protocol | ⬜ Not started |
-| 5 | Retrieval Fundamentals (embeddings, similarity math, chunking, vector DBs, dense/sparse/hybrid search, ANN/HNSW) | ⬜ Not started |
+| 3 | [Memory](./03-memory.md) (short-term, long-term, episodic, semantic, working) | ✅ Done |
+| 4 | [MCP](./04-mcp.md) — Model Context Protocol | ✅ Done |
+| 5 | Retrieval Fundamentals (embeddings, similarity math, chunking, vector DBs, dense/sparse/hybrid search, ANN/HNSW) | ⏳ Next |
 | 6 | RAG & Advanced RAG (query rewriting, CRAG, Self-RAG, Adaptive RAG, parent-child/multi-vector retrieval, Graph RAG) | ⬜ Not started |
 | 7 | Agentic RAG (where retrieval and agents intersect) | ⬜ Not started |
 | 8 | AI Architecture (full production system design) | ⬜ Not started |
@@ -35,10 +35,10 @@ agentic-ai-handbook/
 ├── README.md                                    ← you are here
 ├── glossary.md                                   ← append-only term reference
 ├── 01-llm-fundamentals-and-tool-calling.md       ✅
-├── 02-agentic-core.md                            (coming next)
-├── 03-memory.md
-├── 04-mcp.md
-├── 05-retrieval-fundamentals.md
+├── 02-agentic-core.md                            ✅
+├── 03-memory.md                                  ✅
+├── 04-mcp.md                                     ✅
+├── 05-retrieval-fundamentals.md                  (coming next)
 ├── 06-rag-and-advanced-rag.md
 ├── 07-agentic-rag.md
 ├── 08-ai-architecture.md

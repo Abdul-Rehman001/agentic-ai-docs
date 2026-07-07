@@ -68,4 +68,46 @@
 
 ---
 
-*(Modules 3+ will append their terms below as they're built.)*
+## From Module 3: Memory
+
+**Working Memory** — What's actively held for the current reasoning step; the immediate context/scratchpad.
+
+**Short-term Memory** — Recent conversation turns kept in context, not yet compressed or discarded.
+
+**Long-term Memory** — Information retained indefinitely in external storage, retrieved only when relevant to the current query.
+
+**Episodic Memory** — Memory of specific past events/conversations, tied to a particular time/context.
+
+**Semantic Memory** — Durable, event-independent facts (e.g., a user preference), decoupled from which conversation they came from.
+
+**Sliding Window (memory)** — Keeping only the last N turns of a conversation, dropping older ones entirely.
+
+**Rolling Summarization** — Periodically compressing older conversation turns into a summary to keep context bounded while preserving gist.
+
+**Fact Extraction** — Running an LLM step to pull out durable, reusable facts from a conversation for long-term storage, rather than storing the raw conversation.
+
+**Recency Weighting** — Prioritizing more recent facts over older, potentially stale or contradicted ones during memory retrieval.
+
+---
+
+## From Module 4: MCP (Model Context Protocol)
+
+**MCP (Model Context Protocol)** — An open standard protocol defining how AI applications (clients) discover and communicate with external tools, data sources, and prompts (servers), without needing bespoke per-application integrations.
+
+**MCP Host** — The application the user interacts with, containing one or more MCP Clients (e.g., Claude Desktop, an IDE, a custom agent app).
+
+**MCP Client** — Component inside a host maintaining a connection to a specific MCP Server and handling protocol-level communication.
+
+**MCP Server** — Exposes a set of capabilities (tools, resources, prompts) from an external system, usable by any MCP-compatible client.
+
+**MCP Tool** — A callable function exposed by an MCP server, conceptually identical to Module 1's function/tool calling, but discoverable/invokable via the standardized protocol.
+
+**MCP Resource** — Addressable, typically read-only content (a file, record, document) an MCP server exposes for the host to pull into context.
+
+**MCP Prompt** — A pre-defined, reusable prompt template exposed by an MCP server.
+
+**Sampling (MCP)** — A primitive letting an MCP server request that the client's LLM generate a completion on the server's behalf, inverting the usual client-to-server call direction.
+
+---
+
+*(Modules 5+ will append their terms below as they're built.)*

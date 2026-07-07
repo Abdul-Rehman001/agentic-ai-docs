@@ -2,12 +2,21 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Book, FileText, ChevronRight, Menu, ChevronLeft } from 'lucide-react';
+import { Book, FileText, ChevronRight, Menu, ChevronLeft, CheckCircle2 } from 'lucide-react';
+import { useProgress } from './ProgressContext';
 
 export default function AppLayout({ children, docs }: { children: React.ReactNode, docs: any[] }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
   const pathname = usePathname();
+  const { completedModules, isCompleted } = useProgress();
+
+  // Only count actual numbered modules for progress (exclude README/Glossary)
+  const learningModules = docs.filter(d => !['readme', 'glossary'].includes(d.slug.toLowerCase()));
+  const totalModules = learningModules.length;
+  // Calculate how many of the completed slugs are actually learning modules
+  const completedCount = completedModules.filter(slug => learningModules.some(m => m.slug === slug)).length;
+  const progressPercent = totalModules > 0 ? (completedCount / totalModules) * 100 : 0;
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -56,8 +65,14 @@ export default function AppLayout({ children, docs }: { children: React.ReactNod
                 ) : isGlossary ? (
                   <FileText className="w-4 h-4" />
                 ) : (
-                  <div className={`w-4 h-4 rounded-full border flex items-center justify-center text-[8px] font-bold transition-colors ${isActive ? 'border-blue-400 text-blue-400' : 'border-gray-600 text-gray-500 group-hover:border-blue-400 group-hover:text-blue-400'}`}>
-                    {doc.title.match(/^\d+/)?.[0] || '•'}
+                  <div className={`w-4 h-4 rounded-full border flex items-center justify-center text-[8px] font-bold transition-colors ${
+                    isCompleted(doc.slug)
+                      ? 'border-green-500 bg-green-500/10 text-green-400'
+                      : isActive 
+                        ? 'border-blue-400 text-blue-400' 
+                        : 'border-gray-600 text-gray-500 group-hover:border-blue-400 group-hover:text-blue-400'
+                  }`}>
+                    {isCompleted(doc.slug) ? <CheckCircle2 className="w-2.5 h-2.5" /> : (doc.title.match(/^\d+/)?.[0] || '•')}
                   </div>
                 )}
               </div>
@@ -75,11 +90,16 @@ export default function AppLayout({ children, docs }: { children: React.ReactNod
       {!isDesktopCollapsed && (
         <div className="p-4 border-t border-border">
           <div className="bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border border-blue-500/20 rounded-xl p-4">
-            <p className="text-xs text-blue-300/80 mb-2 font-medium">Progress</p>
-            <div className="h-1.5 w-full bg-gray-800 rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 w-1/4 rounded-full"></div>
+            <div className="flex justify-between items-end mb-2">
+              <p className="text-xs text-blue-300/80 font-medium">Progress</p>
+              <p className="text-[10px] text-gray-400 font-medium">{completedCount} / {totalModules} Modules</p>
             </div>
-            <p className="text-[10px] text-gray-500 mt-2 text-right">1 / 10 Modules</p>
+            <div className="h-1.5 w-full bg-gray-800 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all duration-700 ease-out"
+                style={{ width: `${progressPercent}%` }}
+              ></div>
+            </div>
           </div>
         </div>
       )}

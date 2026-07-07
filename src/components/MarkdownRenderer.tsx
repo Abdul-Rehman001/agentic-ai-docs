@@ -9,8 +9,9 @@ mermaid.initialize({
   startOnLoad: false,
   theme: 'dark',
   securityLevel: 'loose',
+  flowchart: { htmlLabels: true },
   themeVariables: {
-    fontFamily: 'inherit',
+    fontFamily: '"Inter", ui-sans-serif, system-ui, sans-serif',
     primaryColor: '#09090b',
     primaryTextColor: '#fafafa',
     primaryBorderColor: '#3b82f6',

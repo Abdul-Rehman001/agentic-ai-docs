@@ -186,4 +186,70 @@
 
 ---
 
-*(Modules 7+ will append their terms below as they're built.)*
+## From Module 7: Agentic RAG
+
+**Agentic RAG** — Treating retrieval as one tool among several that an agent can choose to invoke, iterate on, or skip, based on its own reasoning at each step of the agent loop — rather than retrieval being a fixed, always-executed pipeline stage.
+
+**Iterative Retrieval** — Retrieving multiple times within a single request, with each retrieval's query and necessity decided based on what prior retrievals revealed, rather than a single fixed retrieval pass.
+
+---
+
+## From Module 8: AI Architecture
+
+**LLM Gateway** — A dedicated architectural layer centralizing model routing, fallback handling, cost tracking, and prompt versioning for all LLM calls in a system.
+
+**Tool Router** — The component deciding which specific tool or external system handles a given sub-task, distinct from the Planner's higher-level task decomposition.
+
+**Stateless Application Layer** — Designing backend/gateway/planner/router components so any instance can handle any request, with all actual state held in dedicated data stores (Redis/SQL/Vector DB) rather than in the application process itself, enabling horizontal scaling.
+
+**Prompt Versioning** — Managing which version of a prompt template is active via a config/database layer rather than hardcoding it in application code, enabling rollback or A/B testing without redeployment.
+
+---
+
+## From Module 9: Evaluation
+
+**Hallucination** — A confident-sounding model claim that isn't actually supported by the provided context or isn't factually true.
+
+**Groundedness** — Whether each part of a generated answer can be traced back to specific retrieved context, rather than being an unsupported claim.
+
+**Faithfulness** — Whether a generated answer's claims are all supported by the retrieved context, without unsupported additions.
+
+**Answer Relevance** — Whether a generated answer actually addresses the user's question, independent of whether its claims are faithful/grounded.
+
+**Precision@K** — The fraction of the top-K retrieved chunks that are actually relevant to the query.
+
+**Recall@K** — The fraction of all truly relevant chunks in the knowledge base that were successfully retrieved within the top-K.
+
+**LLM-as-a-Judge** — Using a separate LLM call to score outputs against defined evaluation criteria, instead of manual human review of every output.
+
+**Self-preference Bias** — The tendency of a model acting as judge to rate outputs (especially its own or stylistically similar ones) more favorably than a neutral judge would.
+
+**Task Completion Rate** — In agentic systems, the fraction of test tasks an agent actually completes correctly end-to-end.
+
+**Tool Call Accuracy** — Whether an agent called the right tool with the right arguments at the right time, evaluated separately from whether the final answer happened to be correct.
+
+**Trajectory Evaluation** — Assessing the reasoning path an agent took to reach an answer, not just the final output.
+
+---
+
+## From Module 10: Production Topics
+
+**Semantic Caching** — Caching keyed on embedding similarity rather than exact string match, so semantically similar (not just identical) queries can hit the cache.
+
+**Model Tiering** — Using cheaper/faster models for simple sub-tasks and reserving expensive reasoning-tier models for genuinely complex steps, as a cost-optimization strategy.
+
+**Guardrails** — Application-level checks and constraints on model inputs and/or outputs to prevent unsafe, off-topic, or policy-violating behavior, distinct from a model's built-in safety training.
+
+**Moderation** — Screening inputs/outputs specifically for harmful content, often via a dedicated moderation API/model.
+
+**Exponential Backoff** — A retry strategy where wait time between attempts increases progressively, rather than retrying immediately at a fixed interval.
+
+**Fallback Model** — An alternate model/provider a system switches to if the primary one is unavailable or fails repeatedly, to still serve the request.
+
+**Observability** — The general ability to understand what a system is doing and why, after the fact, without needing to reproduce an issue live.
+
+**Tracing** — Recording the full path a single request took through a system (decisions, tool calls, retrieved content, outputs) as one connected, inspectable record.
+
+---
+
+*(This glossary is complete through Module 10 — the full 10-module handbook.)*

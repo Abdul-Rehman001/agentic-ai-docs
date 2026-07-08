@@ -2,6 +2,7 @@ import { getDocBySlug, getDocSlugs, getAllDocs } from '@/lib/markdown';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 import ModuleProgressCheckbox from '@/components/ModuleProgressCheckbox';
 import PageNavigation from '@/components/PageNavigation';
+import PageToolbar from '@/components/PageToolbar';
 import { notFound } from 'next/navigation';
 import { Clock } from 'lucide-react';
 
@@ -34,10 +35,16 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
 
   return (
     <article className="animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
-      {/* Reading Time Badge */}
-      <div className="flex items-center gap-2 mb-8 text-sm font-medium text-gray-400 bg-white/5 w-fit px-3 py-1.5 rounded-full border border-white/5">
-        <Clock className="w-4 h-4 text-blue-400" />
-        <span>{readingTime} min read</span>
+      {/* Toolbar area */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+        {/* Reading Time Badge */}
+        <div className="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/5 w-fit px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/5 shadow-sm">
+          <Clock className="w-4 h-4 text-blue-500 dark:text-blue-400" />
+          <span>{readingTime} min read</span>
+        </div>
+        
+        {/* Quick Actions (Share, Print, Edit) */}
+        <PageToolbar slug={resolvedParams.slug} />
       </div>
 
       <MarkdownRenderer content={doc.content} />

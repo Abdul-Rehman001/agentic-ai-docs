@@ -133,6 +133,8 @@ sequenceDiagram
 
 **Minimal Python example (Anthropic API):**
 
+> *(💡 **Note for JS/TS Devs:** This example uses standard dictionaries for schemas. In production, we often use Pydantic to strictly type these schemas. See [Module 0: Python Patterns](./00-python-patterns.md) to see how Pydantic maps to TypeScript interfaces.)*
+
 ```python
 import anthropic
 

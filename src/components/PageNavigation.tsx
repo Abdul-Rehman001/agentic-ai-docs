@@ -36,36 +36,39 @@ export default function PageNavigation({ prevDoc, nextDoc }: PageNavigationProps
   if (!prevDoc && !nextDoc) return null;
 
   return (
-    <div className="mt-8 pt-8 border-t border-gray-200 dark:border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {prevDoc ? (
+    <div className="mt-6 pt-6 border-t border-gray-200 dark:border-white/10 flex flex-col sm:flex-row gap-3">
+      {prevDoc && (
         <Link 
           href={`/${prevDoc.slug}`}
-          className="flex flex-col gap-1 p-4 rounded-xl border border-gray-200 dark:border-white/5 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition-colors group shadow-sm dark:shadow-none"
+          className="flex-1 flex flex-col gap-0.5 p-3 rounded-lg border border-gray-200 dark:border-white/5 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition-colors group shadow-sm dark:shadow-none"
         >
-          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
-            <ChevronLeft className="w-4 h-4" />
+          <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
+            <ChevronLeft className="w-3 h-3" />
             Previous
           </div>
-          <div className="font-medium text-gray-900 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-white transition-colors truncate">
+          <div className="text-sm font-medium text-gray-900 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-white transition-colors line-clamp-2">
             {prevDoc.title}
           </div>
         </Link>
-      ) : <div />}
+      )}
 
-      {nextDoc ? (
+      {/* Spacer for when there's only a Next button */}
+      {!prevDoc && nextDoc && <div className="hidden sm:block flex-1" />}
+
+      {nextDoc && (
         <Link 
           href={`/${nextDoc.slug}`}
-          className="flex flex-col gap-1 p-4 rounded-xl border border-gray-200 dark:border-white/5 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition-colors group items-end text-right shadow-sm dark:shadow-none"
+          className="flex-1 flex flex-col gap-0.5 p-3 rounded-lg border border-gray-200 dark:border-white/5 bg-white dark:bg-white/5 hover:bg-gray-50 dark:hover:bg-white/10 transition-colors group items-start sm:items-end text-left sm:text-right shadow-sm dark:shadow-none"
         >
-          <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
+          <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
             Next
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3 h-3" />
           </div>
-          <div className="font-medium text-gray-900 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-white transition-colors truncate">
+          <div className="text-sm font-medium text-gray-900 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-white transition-colors line-clamp-2">
             {nextDoc.title}
           </div>
         </Link>
-      ) : <div />}
+      )}
     </div>
   );
 }

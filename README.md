@@ -12,10 +12,10 @@ A modular, self-built handbook for learning Agentic AI end-to-end — theory, ar
 | 4 | [MCP](./04-mcp.md) — Model Context Protocol | ✅ Done |
 | 5 | [Retrieval Fundamentals](./05-retrieval-fundamentals.md) (embeddings, similarity math, chunking, vector DBs, dense/sparse/hybrid search, ANN/HNSW) | ✅ Done |
 | 6 | [RAG & Advanced RAG](./06-rag-and-advanced-rag.md) (query rewriting, CRAG, Self-RAG, Adaptive RAG, parent-child/multi-vector retrieval, Graph RAG) | ✅ Done |
-| 7 | Agentic RAG (where retrieval and agents intersect) | ⏳ Next |
-| 8 | AI Architecture (full production system design) | ⬜ Not started |
-| 9 | Evaluation (hallucination detection, Precision@K/Recall@K, groundedness, faithfulness, LLM-as-judge) | ⬜ Not started |
-| 10 | Production Topics (caching, cost, rate limiting, streaming, guardrails, observability, tracing, retries, fallback models) | ⬜ Not started |
+| 7 | [Agentic RAG](./07-agentic-rag.md) (where retrieval and agents intersect) | ✅ Done |
+| 8 | [AI Architecture](./08-ai-architecture.md) (full production system design) | ✅ Done |
+| 9 | [Evaluation](./09-evaluation.md) (hallucination detection, Precision@K/Recall@K, groundedness, faithfulness, LLM-as-judge) | ✅ Done |
+| 10 | [Production Topics](./10-production.md) (caching, cost optimization, rate limiting, streaming, guardrails, observability, tracing, retries, fallback models) | ✅ Done |
 
 ## Why This Order
 
@@ -40,11 +40,15 @@ agentic-ai-handbook/
 ├── 04-mcp.md                                     ✅
 ├── 05-retrieval-fundamentals.md                  ✅
 ├── 06-rag-and-advanced-rag.md                    ✅
-├── 07-agentic-rag.md                             (coming next)
-├── 08-ai-architecture.md
-├── 09-evaluation.md
-└── 10-production.md
+├── 07-agentic-rag.md                             ✅
+├── 08-ai-architecture.md                         ✅
+├── 09-evaluation.md                              ✅
+└── 10-production.md                              ✅
 ```
+
+## Handbook Status: Complete (10/10 modules)
+
+All 10 modules are done. This handbook now covers the full arc from LLM fundamentals through to production deployment concerns — every module builds directly on the ones before it, and the glossary is a complete, cross-referenced term set spanning the whole thing.
 
 ## How to Use This
 

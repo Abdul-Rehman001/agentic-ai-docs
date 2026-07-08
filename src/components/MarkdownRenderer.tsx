@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import React, { useEffect, useRef, useState } from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Copy, Check, Target, Wrench, BookOpen, Search, ArrowRight, CheckCircle2, XCircle, Lightbulb } from 'lucide-react';
 import mermaid from 'mermaid';
 
 mermaid.initialize({
@@ -69,6 +69,45 @@ const Mermaid = ({ chart }: { chart: string }) => {
   );
 };
 
+const EMOJI_MAP: Record<string, React.ReactNode> = {
+  '🎯': <Target className="inline-block w-5 h-5 text-purple-500 mr-2 -mt-1" />,
+  '🛠️': <Wrench className="inline-block w-5 h-5 text-gray-500 mr-2 -mt-1" />,
+  '📖': <BookOpen className="inline-block w-5 h-5 text-blue-500 mr-2 -mt-1" />,
+  '🔍': <Search className="inline-block w-5 h-5 text-indigo-500 mr-2 -mt-1" />,
+  '➡️': <ArrowRight className="inline-block w-4 h-4 text-blue-500 mx-1 -mt-0.5" />,
+  '✅': <CheckCircle2 className="inline-block w-5 h-5 text-green-500 mr-1.5 -mt-0.5" />,
+  '⚠️': <AlertTriangle className="inline-block w-5 h-5 text-yellow-500 mr-1.5 -mt-0.5" />,
+  '❌': <XCircle className="inline-block w-5 h-5 text-red-500 mr-1.5 -mt-0.5" />,
+  '💡': <Lightbulb className="inline-block w-5 h-5 text-yellow-400 mr-1 -mt-0.5" />
+};
+
+function processText(text: string): React.ReactNode {
+  const regex = new RegExp(`(${Object.keys(EMOJI_MAP).join('|')})`, 'g');
+  const parts = text.split(regex);
+  if (parts.length === 1) return text;
+  
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (EMOJI_MAP[part]) {
+          return <React.Fragment key={i}>{EMOJI_MAP[part]}</React.Fragment>;
+        }
+        return part;
+      })}
+    </>
+  );
+}
+
+function processChildren(children: React.ReactNode): React.ReactNode {
+  if (typeof children === 'string') {
+    return processText(children);
+  }
+  if (Array.isArray(children)) {
+    return children.map((child, i) => <React.Fragment key={i}>{processChildren(child)}</React.Fragment>);
+  }
+  return children;
+}
+
 const PreComponent = ({ children, className, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
   const preRef = useRef<HTMLPreElement>(null);
   const [copied, setCopied] = useState(false);
@@ -102,9 +141,10 @@ const PreComponent = ({ children, className, ...props }: React.HTMLAttributes<HT
     <div className="relative group my-6">
       <button 
         onClick={handleCopy}
-        className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-500/20 hover:bg-blue-500/40 border border-blue-500/30 text-blue-300 rounded-md px-2 py-1 text-xs font-medium z-10"
+        className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 text-blue-400 dark:text-blue-300 rounded-md p-1.5 z-10 flex items-center justify-center backdrop-blur-sm"
+        title="Copy code"
       >
-        {copied ? 'Copied!' : 'Copy'}
+        {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
       </button>
       <pre ref={preRef} className={`mt-0! mb-0! overflow-x-auto ${className || ''}`} {...props}>
         {children}
@@ -196,6 +236,14 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
               </div>
             );
           },
+          p: ({ children, ...props }) => <p {...props}>{processChildren(children)}</p>,
+          li: ({ children, ...props }) => <li {...props}>{processChildren(children)}</li>,
+          td: ({ children, ...props }) => <td {...props}>{processChildren(children)}</td>,
+          th: ({ children, ...props }) => <th {...props}>{processChildren(children)}</th>,
+          h1: ({ children, ...props }) => <h1 {...props}>{processChildren(children)}</h1>,
+          h3: ({ children, ...props }) => <h3 {...props}>{processChildren(children)}</h3>,
+          h4: ({ children, ...props }) => <h4 {...props}>{processChildren(children)}</h4>,
+          blockquote: ({ children, ...props }) => <blockquote {...props}>{processChildren(children)}</blockquote>,
           pre: PreComponent,
           h2({ children, ...props }) {
             const text = String(children);
@@ -207,7 +255,7 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
                 </h2>
               );
             }
-            return <h2 {...props}>{children}</h2>;
+            return <h2 {...props}>{processChildren(children)}</h2>;
           },
           code({ className, children, ...rest }) {
             const match = /language-(\w+)/.exec(className || '');

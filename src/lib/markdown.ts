@@ -40,18 +40,26 @@ export function getAllDocs() {
     // Capitalize words
     title = title.replace(/\b\w/g, l => l.toUpperCase());
 
+    const fullPath = path.join(docsDirectory, slug);
+    const content = fs.readFileSync(fullPath, 'utf8');
+
     return {
       slug: slug.replace(/\.md$/, ''),
       title: title,
+      content: content,
     };
   });
   
-  // Sort docs: Numbers first (01, 02), then README, then Glossary
+  // Sort docs: start-here first, then readme, then glossary, then numbers
   return docs.sort((a, b) => {
-    if (a.slug.toLowerCase() === 'readme') return -1;
-    if (b.slug.toLowerCase() === 'readme') return 1;
-    if (a.slug.toLowerCase() === 'glossary') return 1;
-    if (b.slug.toLowerCase() === 'glossary') return -1;
-    return a.slug.localeCompare(b.slug);
+    const slugA = a.slug.toLowerCase();
+    const slugB = b.slug.toLowerCase();
+    if (slugA === 'start-here') return -1;
+    if (slugB === 'start-here') return 1;
+    if (slugA === 'readme') return -1;
+    if (slugB === 'readme') return 1;
+    if (slugA === 'glossary') return 1;
+    if (slugB === 'glossary') return -1;
+    return slugA.localeCompare(slugB);
   });
 }

@@ -10,7 +10,19 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'Agentic AI Handbook',
-  description: 'A modular, self-built handbook for learning Agentic AI end-to-end.',
+  description: 'A modular, self-built handbook for learning Agentic AI end-to-end. Built for developers transitioning to AI engineering.',
+  openGraph: {
+    title: 'Agentic AI Handbook',
+    description: 'Learn Agentic AI end-to-end. Modules covering LLMs, MCP, RAG, Memory, and Production.',
+    url: 'https://agentic-ai-handbook.dev',
+    siteName: 'Agentic AI Handbook',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Agentic AI Handbook',
+    description: 'A modular handbook for learning Agentic AI end-to-end.',
+  }
 };
 
 export default function RootLayout({

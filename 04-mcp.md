@@ -128,6 +128,8 @@ In terms of the agent loop from Module 2 (Reason → Act → Observe → Repeat)
 
 This shows how little boilerplate is needed to expose a tool via MCP (using the official Python SDK conceptually):
 
+> *(💡 **Note for JS/TS Devs:** Building MCP servers relies heavily on Python's `@decorator` pattern and `async/await` syntax. If you need a refresher on how these work under the hood, check out [Module 0: Python Patterns](./00-python-patterns.md).)*
+
 ```python
 from mcp.server import Server
 from mcp.types import Tool, TextContent
